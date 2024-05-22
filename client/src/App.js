@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useBlockchain from './hooks/useBlockchain';
 import './App.css';
 
 function App() {
-  const { account, patients, newPatient, setNewPatient, addPatient } = useBlockchain();
+  const { account, patients, newPatient, setNewPatient, addPatient, connectToMetaMask } = useBlockchain();
+
+  useEffect(() => {
+    connectToMetaMask();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +26,8 @@ function App() {
   return (
     <div className="container">
       <h1>Electronic Health Records on Blockchain</h1>
+      <button onClick={connectToMetaMask}>Connect to MetaMask</button>
+      {account && <p>Connected account: {account}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -53,7 +59,6 @@ function App() {
       </ul>
     </div>
   );
-  
 }
 
 export default App;
