@@ -1,5 +1,6 @@
 import React from 'react';
 import useBlockchain from './hooks/useBlockchain';
+import './App.css';
 
 function App() {
   const { account, patients, newPatient, setNewPatient, addPatient } = useBlockchain();
@@ -19,9 +20,8 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Electronic Health Records on Blockchain</h1>
-      <p>Account: {account}</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -53,6 +53,7 @@ function App() {
       </ul>
     </div>
   );
+  
 }
 
 export default App;
