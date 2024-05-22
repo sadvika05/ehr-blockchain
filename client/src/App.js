@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import PatientForm from './components/Patientform';
+import PatientList from './components/PatientList';
 import useBlockchain from './hooks/useBlockchain';
 import './App.css';
 
 function App() {
   const { account, patients, newPatient, setNewPatient, addPatient, connectToMetaMask } = useBlockchain();
-
-  useEffect(() => {
-    connectToMetaMask();
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,40 +26,23 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <h1>Electronic Health Records on Blockchain</h1>
-      <button onClick={connectToMetaMask}>Connect to MetaMask</button>
-      {account && <p>Connected account: {account}</p>}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={newPatient.name}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="age"
-          placeholder="Age"
-          value={newPatient.age}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="medicalHistory"
-          placeholder="Medical History"
-          value={newPatient.medicalHistory}
-          onChange={handleChange}
-        />
-        <button type="submit">Add Patient</button>
-      </form>
-      <ul>
-        {patients.map((patient, index) => (
-          <li key={index}>{patient[0]} - {patient[1]} - {patient[2]}</li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <div className="app">
+        <Navbar account={account} connectToMetaMask={connectToMetaMask} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/patients"
+            element={
+              <>
+                <PatientForm newPatient={newPatient} handleChange={handleChange} handleSubmit={handleSubmit} />
+                <PatientList patients={patients} />
+              </>
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
