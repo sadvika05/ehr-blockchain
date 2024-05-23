@@ -53,8 +53,7 @@ button:hover {
 
 ul {
   list-style-type: none;
-  padding: 40px;
-  padding-left: 60px;
+  padding: 0;
 }
 
 li {
