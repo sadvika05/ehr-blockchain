@@ -1,3 +1,4 @@
+// src/hooks/useBlockchain.jsx
 import { useState, useEffect } from 'react';
 import Web3 from 'web3';
 import EHRContract from '../contracts/EHR.json';
@@ -8,6 +9,14 @@ const useBlockchain = () => {
   const [ehr, setEhr] = useState(null);
   const [patients, setPatients] = useState([]);
   const [newPatient, setNewPatient] = useState({ name: '', age: '', medicalHistory: '' });
+
+  useEffect(() => {
+    if (typeof window.ethereum !== 'undefined') {
+      connectToMetaMask();
+    } else {
+      console.error('MetaMask is not installed');
+    }
+  }, []);
 
   useEffect(() => {
     if (web3) {

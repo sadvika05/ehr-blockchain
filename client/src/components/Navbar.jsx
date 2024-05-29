@@ -1,19 +1,24 @@
-// src/components/Navbar.js
+// src/components/Navbar.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
 
-const Navbar = ({ account, connectToMetaMask }) => (
-  <nav className="navbar">
-    <h1>Blockchain EHR</h1>
-    <div className="navbar-links">
-      <Link to="/">Home</Link>
-      <Link to="/patients">Patient Records</Link>
-    </div>
-    <button onClick={connectToMetaMask}>
-      {account ? `Connected: ${account.substring(0, 6)}...${account.substring(account.length - 4)}` : 'Connect to MetaMask'}
-    </button>
-  </nav>
-);
+const Navbar = ({ account, connectToMetaMask }) => {
+  return (
+    <nav>
+      <h1>EHR Blockchain</h1>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/patients">Patient Records</Link>
+      </div>
+      <div>
+        {account ? (
+          <p>Connected: {account}</p>
+        ) : (
+          <button onClick={connectToMetaMask}>Connect to MetaMask</button>
+        )}
+      </div>
+    </nav>
+  );
+};
 
 export default Navbar;

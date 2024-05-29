@@ -63,3 +63,34 @@ li {
   margin-bottom: 5px;
 }
 
+/* src/App.css */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #282c34;
+  color: white;
+}
+
+nav div {
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav button {
+  padding: 0.5rem 1rem;
+  background-color: #61dafb;
+  border: none;
+  cursor: pointer;
+  color: #282c34;
+}
+
+nav button:hover {
+  background-color: #21a1f1;
+}
